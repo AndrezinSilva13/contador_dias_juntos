@@ -36,23 +36,28 @@
         }
         .galeria {
             display: flex;
-            gap: 15px;
+            gap: 20px;
             flex-wrap: wrap;
             justify-content: center;
             margin-top: 20px;
         }
         .galeria img {
-            width: 150px;
-            height: 150px;
+            width: 180px;
+            height: 180px;
             object-fit: cover;
             border-radius: 50%;
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            clip-path: path("M 75 10 C 40 -30, 0 20, 75 90 C 150 20, 110 -30, 75 10 Z");
         }
         .galeria img:hover {
             transform: scale(1.1);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+        @media (max-width: 768px) {
+            .galeria img {
+                width: 140px;
+                height: 140px;
+            }
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-20px); }
@@ -62,30 +67,6 @@
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
-        }
-        .hearts {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            height: 100vh;
-            overflow: hidden;
-            pointer-events: none;
-        }
-        .heart {
-            position: absolute;
-            bottom: 0;
-            width: 25px;
-            height: 25px;
-            background: red;
-            clip-path: path("M10 30 C 10 10, 40 0, 50 20 C 60 0, 90 10, 90 30 C 90 50, 50 90, 50 90 C 50 90, 10 50, 10 30 Z");
-            animation: floatUp 5s linear infinite;
-            opacity: 0.6;
-        }
-        @keyframes floatUp {
-            0% { transform: translateY(0) scale(1); opacity: 0.6; }
-            100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
         }
     </style>
 </head>
@@ -102,11 +83,9 @@
         <img src="foto5.jpg" alt="Foto do casal 5">
     </div>
 
-    <div class="hearts"></div>
-
     <script>
         function atualizarContador() {
-            const dataInicio = new Date("2023-02-11T00:00:00"); 
+            const dataInicio = new Date("2023-02-11T16:41:26"); 
             const agora = new Date();
             const diferenca = agora - dataInicio;
             
@@ -120,20 +99,6 @@
         }
         setInterval(atualizarContador, 1000);
         atualizarContador();
-
-        function criarCorações() {
-            const heartsContainer = document.querySelector(".hearts");
-            for (let i = 0; i < 15; i++) {
-                let heart = document.createElement("div");
-                heart.classList.add("heart");
-                heart.style.left = Math.random() * 100 + "vw";
-                heart.style.animationDuration = Math.random() * 3 + 2 + "s";
-                heartsContainer.appendChild(heart);
-                setTimeout(() => heart.remove(), 5000);
-            }
-        }
-        setInterval(criarCorações, 500);
     </script>
 </body>
 </html>
-
